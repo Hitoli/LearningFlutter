@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074526066754",
+    "project_id": "wallsocialapp-1e7d7",
+    "storage_bucket": "wallsocialapp-1e7d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074526066754:android:fd9a6f82940f032e4875db",
+        "android_client_info": {
+          "package_name": "com.example.flutter_learn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzrCHqvC-h430Vo6jFsXQFz5fkgH_nkZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

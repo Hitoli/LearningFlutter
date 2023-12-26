@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/components/button.dart';
 import 'package:flutter_learn/components/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -15,6 +16,36 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final confirmPasswordTextController = TextEditingController();
+
+  void signUp() {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    if (passwordTextController.text != confirmPasswordTextController.text) {
+      Navigator.pop(context);
+      displayMessage("Passwords don't match!");
+      return;
+    }
+    try {
+      FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessage(e.code);
+    }
+  }
+
+  void displayMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(message),
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: "Confirm Password",
                       obscureText: true),
                   const SizedBox(height: 20),
-                  MyButtonComponent(onTap: () {}, text: "Sign Up"), //Button
+                  MyButtonComponent(onTap: signUp, text: "Sign Up"), //Button
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
